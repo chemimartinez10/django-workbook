@@ -1,0 +1,135 @@
+{% extends "layout/app.html"%}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/modal.css' %}">
+{% endblock %}
+{% block app %}
+<section class="card">
+    <h1>Latest lists</h1>
+    <div class="card__container">
+        <article>
+            <h3>Add new list</h3>
+            <ul>
+                <li>Crear nueva tarea</li>
+            </ul>
+            <span><a href="#modal-one"><i class="fas fa-plus"></i></a></span>
+        </article>
+        {% if listas %}
+        <article>
+            <h3>Last task updated</h3>
+            <p>
+                {{last_task.list_task.description}}
+            </p>
+            <ul>
+                <li>
+                    <input class="check-task" name="check{{last_task.pk}}" type="checkbox" data-url="{% url 'task_update' last_task.pk last_task.done %}" {% if last_task.done %} checked {% endif %}>
+                    {{last_task.description}}
+                </li>
+            </ul>
+        </article>
+        <article>
+            {% with list=listas|first%}
+            <h3>{{list.title}}</h3>
+            <p>{{list.description}}</p>
+            <ul>
+                {% for task in list.item_set.all %}
+                <li>
+                    <input class="check-task" name="check{{task.pk}}" type="checkbox" data-url="{% url 'task_update' task.pk task.done %}" {% if task.done %} checked {% endif %}>
+                    {{task.description}}
+                </li>
+                {% endfor %}
+            </ul>
+            <span>
+                <a href="{% url 'tasks' list.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{% url 'tasks' list.id %}"><i class="fa-solid fa-trash"></i></i></a>
+            </span>
+            {% endwith %}
+        </article>
+        {% endif %}
+    </div>
+</section>
+<section class="card">
+    <h1>Your lists, {{user.username}}!</h1>
+    <div class="card__container">
+        {% for list in listas reversed %}
+        <article>
+            <h3>{{list.title}}</h3>
+            <p>{{list.description}}</p>
+            <ul>
+                {% for task in list.item_set.all %}
+                <li>
+                    <input class="check-task" name="check{{task.pk}}" type="checkbox" data-url="{% url 'task_update' task.pk task.done %}" {% if task.done %} checked {% endif %}>
+                    {{task.description}}
+                </li>
+                {% endfor %}
+            </ul>
+            <span>
+                <a href="{% url 'tasks' list.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="#modal-delete" class="delete-btn" data-id="{% url 'lists_delete' list.pk %}"><i
+                        class="fa-solid fa-trash"></i></i></a>
+            </span>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+<div class="modal" id="modal-one" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{% url 'lists' %}" method="post">
+            <div class="modal-header">
+                <h2>New list</h2>
+                <a href="#close" class="btn-close" aria-hidden="true">×</a>
+                <!--CHANGED TO "#close"-->
+            </div>
+            <div class="modal-body">
+                {% csrf_token %}
+
+                {{form_list}}
+            </div>
+            <div class="modal-footer">
+                <a href="#close">
+                    <button class="btn" type="submit">Go!</button>
+                </a>
+                <!--CHANGED TO "#close"-->
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal" id="modal-delete" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h2>Delete list</h2>
+            <a href="#close" class="btn-close" aria-hidden="true">×</a>
+            <!--CHANGED TO "#close"-->
+        </div>
+        <div class="modal-body">
+            Do you really want to delete this list?
+        </div>
+        <div class="modal-footer">
+            <a href="#close" id="yes-btn" class="btn">
+                Yes
+            </a>
+            <a href="#close" class="btn">
+                No
+            </a>
+            <!--CHANGED TO "#close"-->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    let delete_id
+    const deleteButtons = document.querySelectorAll(".delete-btn")
+    const yesButton = document.getElementById('yes-btn')
+
+    deleteButtons.forEach(element => {
+        element.addEventListener('click', (e) => {
+            let currentIdLocation = e.currentTarget.getAttribute('data-id')
+            yesButton.setAttribute('href', currentIdLocation)
+        })
+    })
+</script>
+{% endblock %}

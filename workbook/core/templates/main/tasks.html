@@ -1,0 +1,84 @@
+{% extends "layout/app.html"%}
+
+{% block app %}
+<section class="card">
+    <h1>List</h1>
+    <form action="{% url 'tasks' list_data.pk %}" method="post">
+        {% csrf_token %}
+        <div class="card__container">
+            <article>
+                <input class="card-title form-field" name="title" id="title" type="text" value="{{list_data.title}}">
+                <label for="description">Description</label>
+                <textarea class="form-field" name="description" id="description" cols="35" rows="4" required>{{list_data.description}}</textarea>
+                <ul>
+                    {% for task in list_data.item_set.all %}
+                    <li>
+                        <input id="task{{forloop.counter}}" name="task{{forloop.counter}}" class="form-field" type="text" value="{{task.description}}">
+                        <input class="form-field" name="check{{forloop.counter}}" type="checkbox" {% if task.done %} checked {% endif %}>
+                        <button id="delete-task{{forloop.counter}}">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                        </button>
+
+                    </li>
+                    {% endfor %}
+                </ul>
+                <span>
+                    <a href="#" id="add-task"><i class="fas fa-plus"></i></a>
+                    <button type="submit" id="save-list">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                    </button>
+                </span>
+            </article>
+        </div>
+    </form>
+</section>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    const form = document.querySelector("form")
+    const list = form.querySelector("ul")
+    const tasks = list.querySelectorAll("li")
+    const addButton = document.getElementById("add-task")
+    const saveButton = document.getElementById("save-list")
+    
+    let lastId = tasks.length ? tasks.length : 0
+    
+    console.log(lastId)
+    function createFormField(){
+        lastId++
+        const item = document.createElement('li')
+        const inputText = document.createElement('input')
+        inputText.type = 'text'
+        inputText.id = `task${lastId}`
+        inputText.name = `task${lastId}`
+        inputText.classList.add('form-field')
+        inputText.setAttribute('required', true)
+        const inputCheck = document.createElement('input')
+        inputCheck.type = 'checkbox'
+        inputCheck.id = `check${lastId}`
+        inputCheck.name = `check${lastId}`
+        inputCheck.classList.add('form-field')
+        const deleteButton = document.createElement('button')
+        deleteButton.id = `delete-task${lastId}`
+        deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`
+        item.appendChild(inputText)
+        item.appendChild(inputCheck)
+        item.appendChild(deleteButton)
+        list.appendChild(item)
+
+        deleteButton.addEventListener('click', e=>{
+            e.preventDefault()
+            lastId--
+            item.remove()
+        })
+    }
+
+    addButton.addEventListener('click', () => {
+        createFormField()
+    })
+
+
+</script>
+{% endblock %}

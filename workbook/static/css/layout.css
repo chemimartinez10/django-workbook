@@ -1,0 +1,333 @@
+.auth__container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form.form__container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 2rem;
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, .2);
+    border-radius: .8rem;
+    background-color: var(--primary-color);
+}
+
+form ul>li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+form textarea{
+    width: 100%;
+}
+
+.form-field {
+    padding: .7rem;
+    box-shadow: inset 0 0 2px 2px rgba(0, 0, 0, .2);
+    border-radius: .4rem;
+    outline: none;
+    border: none;
+}
+
+.form-field[type="checkbox"] {
+    width: 26px;
+    height: 26px;
+}
+
+.form-field:active,
+.form-field:focus {
+    background-color: #ddd;
+}
+
+form br {
+    display: none;
+}
+
+form label {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: .2rem 0;
+}
+
+form>button {
+    margin-top: 1rem;
+    padding: .7rem 1.4rem;
+    color: #000;
+    background: #fff;
+    border: 2px solid #eee;
+    border-radius: .4rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .5s ease, border-color .5s ease;
+}
+
+form>button:hover {
+    background: transparent;
+    border-color: #000;
+}
+
+.card {
+    padding: 1rem;
+    background: var(--base-color);
+    border-radius: .8rem;
+}
+
+.card__container {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card__container>article {
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, .2);
+    border-radius: .8rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    justify-content: space-between;
+    align-items: center;
+    border: 3px solid var(--secondary-color);
+    transition: transform .5s ease;
+    position: relative;
+}
+
+.card__container>article:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+.card__container>article span {
+    align-self: flex-end;
+}
+
+.card__container>article span>button {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.card__container>article span>a>i,
+.card__container>article span>button>i {
+    font-size: 1.8rem;
+    background: var(--primary-color);
+    padding: .8rem;
+    border-radius: 50%;
+    color: var(--base-color);
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, .2);
+    cursor: pointer;
+}
+
+.card__container>article h3 {
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.card__container>article h3 a {
+    padding: 0 .5rem;
+    text-decoration: none;
+    color: inherit;
+}
+.card__container>article >a {
+    padding: 0 .5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+        flex-direction: column;
+        gap: .8rem;
+        justify-content: space-between;
+        align-items: center;
+}
+
+.card__container>article p {
+    font-size: .8rem;
+}
+
+.card__container>article ul {
+    list-style: none;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
+}
+
+.card__container>article ul>li input[type=text] {
+    flex-grow: 1;
+}
+.card__container>article ul>li button {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.card__container>article ul>li button>i {
+    font-size: .8rem;
+    background: var(--red-color);
+    padding: .8rem;
+    border-radius: 50%;
+    color: var(--base-color);
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, .2);
+}
+
+.card__container>article form {
+    width: 100%;
+}
+
+.errorlist {
+    list-style: none;
+    color: var(--red-color);
+}
+
+.helptext {
+    font-weight: 200;
+    font-size: .8rem;
+}
+
+.helptext ul {
+    list-style: none;
+}
+
+/* HEADER */
+
+header {
+    position: fixed;
+    height: 60px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-transparent-color) 100%);
+    width: 100%;
+    padding: 0 2.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--secondary-color);
+    z-index: 99;
+}
+
+header a {
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+header i {
+    font-size: 1.25rem;
+}
+
+.logo-container {
+    width: 50px;
+    height: 50px;
+}
+.image-container {
+    max-width: 250px;
+    max-height: 250px;
+    align-self: center;
+}
+.logo-container img,.image-container img{
+    width: 100%;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+}
+
+/* NAV */
+
+nav {
+    position: fixed;
+    z-index: 50;
+    left: 1rem;
+    top: 0;
+    height: 100vh;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav>ul {
+    background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-transparent-color) 100%);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .8rem;
+    border-radius: .5rem;
+    padding: 1rem;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, .2);
+    font-size: 1.75rem;
+}
+
+nav>ul>li {
+    background: var(--base-transparent-color);
+    border-radius: .5rem;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+    border: 2px solid var(--secondary-color);
+}
+
+nav a {
+    color: var(--text-color);
+}
+
+/* MAIN */
+main {
+    padding: 2rem;
+    padding-top: 6rem;
+    padding-left: 8rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+section {
+    width: 100%;
+    background: var(--base-color);
+    background: linear-gradient(90deg, var(--base-color) 50%, var(--primary-transparent-color) 100%);
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, .2);
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
+section h1 {
+    font-size: 5rem;
+    width: 100%;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+h3, .card-title {
+    font-size: 2rem;
+    background: transparent;
+    border: transparent;
+    font-weight: bold;
+}
+.card__container>article ul.color-palette{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+form.form-color button{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+}
+.card__container>article ul>li button.selected-color{
+    border: 4px solid var(--text-color);
+}

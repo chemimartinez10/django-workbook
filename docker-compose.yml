@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:14.2-alpine3.15
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=workbook
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=psqlworkbook
+  web:
+    build: .
+    command: python workbook/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=workbook
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=psqlworkbook
+    depends_on:
+      - db

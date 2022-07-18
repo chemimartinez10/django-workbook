@@ -1,0 +1,32 @@
+{% extends "layout/app.html"%}
+{% load static %}
+
+
+{% block app %}
+
+<section class="card">
+    <h1>Edit you profile {{user.username}}!</h1>
+    <div class="card__container">
+        <form class="form__container" action="{% url 'profile'%}" method="post" enctype = "multipart/form-data">
+            <div class="image-container">
+                <img src="{{MEDIA_URL}}{{user.profile.image}}" alt="profile picture">
+            </div>
+            {% csrf_token %}
+            {{ form_profile }}
+            {{ form_image }}
+            <button type="submit">Update</button>
+            
+        </form>
+        <form class="form__container" action="{% url 'profile'%}" method="post" id="password_form">
+            {% csrf_token %}
+            {{ form_pass }}
+            <button type="submit">Update</button>
+            
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+{% block js%}
+<script src="{% static 'js/profile.js'%}"></script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout/app.html"%}
+{% load static %}
+
+
+{% block app %}
+
+<section class="card">
+    <h1>Look at your preferences, {{user.username}}!</h1>
+    <div class="card__container">
+        <article>
+            <h3>Interface color</h3>
+            <p>select one</p>
+            <ul class="color-palette">
+                {% for form_color in forms_color %}
+                <li>
+                    <form class="form-color" action="{% url 'settings' %}" method="post">
+                        {% csrf_token %}
+                        {{form_color}}
+                        <button class="{% if form_color.primary_color.value == color_user.primary_color %}selected-color{% endif %}" type="submit" style="background-color:{{ form_color.primary_color.value }};"></button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </article>
+    </div>
+</section>
+
+{% endblock %}
+{% block js%}
+{% endblock %}

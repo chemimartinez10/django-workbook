@@ -1,0 +1,10 @@
+{% extends "layout/auth.html" %}
+
+{% block form %}
+<form class="form__container" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Send</button>
+    <a href="{% url 'register'%}">Or create an account</a>
+</form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "layout/main.html" %}
+{% load static %}
+
+{% block content %}
+<header>
+    <div class="menu-btn">
+        <a href="{% url 'index'%}">
+            Workbook
+        </a>
+    </div>
+    <div class="logo-container">
+        <a href="{% url 'profile' %}"><img src="{% if request.user.profile.image %}{{MEDIA_URL}}{{user.profile.image}}{% else %}{% static 'img/magazine.png' %}{% endif %}" alt=""></a>
+    </div>
+    <div class="user-name">
+        <a href="{% url 'logout' %}"><i class="fa-solid fa-door-open"></i></a>
+    </div>
+</header>
+<nav>
+    <ul>
+        <li><a href="{% url 'lists'%}"><i class="fa-solid fa-list"></i></a></li>
+        <li><a href="{% url 'shared'%}"><i class="fa-solid fa-people-group"></i></a></li>
+        <li><a href="{% url 'settings'%}"><i class="fa-solid fa-gear"></i></a></li>
+    </ul>
+</nav>
+<main class="app__container">
+    {% block app %}{% endblock %}
+</main>
+<footer>
+
+</footer>
+{% endblock %}
+

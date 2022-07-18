@@ -1,0 +1,68 @@
+{% extends "layout/app.html"%}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/modal.css' %}">
+{% endblock %}
+{% block app %}
+<section class="card">
+    <h1>Latest lists</h1>
+    <div class="card__container">
+        {% if listas %}
+        <article>
+            {% with list=listas|first%}
+            <h3>{{list.title}}</h3>
+            <p>{{list.description}}</p>
+            <ul>
+                {% for task in list.item_set.all %}
+                <li>
+                    <input name="check{{task.pk}}" type="checkbox" disabled
+                        data-url="{% url 'task_update' task.pk task.done %}" {% if task.done %} checked {% endif %}>
+                    {{task.description}}
+                </li>
+                {% endfor %}
+            </ul>
+            <p>{{list.user.username}}</p>
+            {% endwith %}
+        </article>
+        {% endif %}
+    </div>
+</section>
+<section class="card">
+    <h1>Everyone lists!</h1>
+    <div class="card__container">
+        {% for list in listas reversed %}
+        <article>
+            <h3>{{list.title}}</h3>
+            <p>{{list.description}}</p>
+            <ul>
+                {% for task in list.item_set.all %}
+                <li>
+                    <input name="check{{task.pk}}" type="checkbox" disabled
+                        data-url="{% url 'task_update' task.pk task.done %}" {% if task.done %} checked {% endif %}>
+                    {{task.description}}
+                </li>
+                {% endfor %}
+            </ul>
+            <p>{{list.user.username}}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    let delete_id
+    const deleteButtons = document.querySelectorAll(".delete-btn")
+    const yesButton = document.getElementById('yes-btn')
+
+    deleteButtons.forEach(element => {
+        element.addEventListener('click', (e) => {
+            let currentIdLocation = e.currentTarget.getAttribute('data-id')
+            yesButton.setAttribute('href', currentIdLocation)
+        })
+    })
+</script>
+{% endblock %}

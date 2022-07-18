@@ -1,0 +1,16 @@
+{% extends "layout/auth.html" %}
+{% load static %}
+
+{% block form %}
+<form class="form__container" action="{% url 'register'%}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Send</button>
+    <a href="{% url 'login'%}">Already registered?</a>
+
+</form>
+{% endblock %}
+
+{% block js%}
+<script src="{% static 'js/register.js'%}"></script>
+{% endblock %}
