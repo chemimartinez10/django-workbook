@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
-from .db import POSTGRESQL
+from .db import HEROKU, POSTGRESQL
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = POSTGRESQL
+DATABASES = HEROKU
 
 
 # Password validation
