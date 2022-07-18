@@ -22,8 +22,9 @@ def index(request):
         else:
             print(form.errors)
     else:
-        form = FormList(initial={"user":request.user})
-    return render(request, 'main/index.html', {'form_list': form, 'listas':listas, 'last_task':last_task})
+        form = FormList(initial={"user": request.user})
+    return render(request, 'main/index.html', {'form_list': form, 'listas': listas, 'last_task': last_task})
+
 
 @login_required
 def lists(request):
@@ -38,8 +39,9 @@ def lists(request):
         else:
             print(form.errors)
     else:
-        form = FormList(initial={"user":request.user})
-    return render(request, 'main/lists.html', {'form_list': form, 'listas':listas, 'last_task':last_task})
+        form = FormList(initial={"user": request.user})
+    return render(request, 'main/lists.html', {'form_list': form, 'listas': listas, 'last_task': last_task})
+
 
 @login_required
 def shared(request):
@@ -54,8 +56,9 @@ def shared(request):
         else:
             print(form.errors)
     else:
-        form = FormList(initial={"user":request.user})
-    return render(request, 'main/shared.html', {'form_list': form, 'listas':listas, 'last_task':last_task})
+        form = FormList(initial={"user": request.user})
+    return render(request, 'main/shared.html', {'form_list': form, 'listas': listas, 'last_task': last_task})
+
 
 @login_required
 def lists_delete(request, id):
@@ -64,12 +67,14 @@ def lists_delete(request, id):
         lista.delete()
     return redirect(request.META.get('HTTP_REFERER'))
 
+
 @login_required
 def tasks(request, id):
     try:
         list_data = ListTask.objects.get(pk=id)
         if request.method == 'POST':
-            task_items = dict(filter(lambda val: 'task' in val[0], request.POST.items()))
+            task_items = dict(
+                filter(lambda val: 'task' in val[0], request.POST.items()))
             list_data.title = request.POST.get('title')
             list_data.description = request.POST.get('description')
             list_data.save()
@@ -77,7 +82,7 @@ def tasks(request, id):
             if tasks.exists():
                 tasks.delete()
             for key, val in task_items.items():
-                new_item=Item(description=val, list_task=list_data)
+                new_item = Item(description=val, list_task=list_data)
                 id = key[4:]
                 if request.POST.get('check'+id):
                     new_item.done = True
@@ -88,11 +93,12 @@ def tasks(request, id):
     except:
         return render(request, 'main/index.html')
 
+
 @login_required
-def task_update(request,id,done):
-    old_item=Item.objects.filter(pk=id, list_task__user=request.user)
+def task_update(request, id, done):
+    old_item = Item.objects.filter(pk=id, list_task__user=request.user)
     if old_item.exists():
-        update_item=old_item[0]
+        update_item = old_item[0]
         if done == 'True':
             update_item.done = False
         else:

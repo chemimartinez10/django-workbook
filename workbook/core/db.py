@@ -1,4 +1,6 @@
 import os
+import dj_database_url
+from decouple import config
 
 POSTGRESQL = {
     'default': {
@@ -9,4 +11,10 @@ POSTGRESQL = {
         'HOST': 'db',
         'PORT': 5432,
     }
+}
+
+HEROKU = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
