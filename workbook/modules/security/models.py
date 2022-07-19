@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from modules.security.methods import get_file_path
+from .methods import get_file_path
 
 
 class Profile(models.Model):

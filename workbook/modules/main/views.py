@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
-from modules.main.models import Item, ListTask
+from .models import Item, ListTask
 
 from .forms import FormList
 
