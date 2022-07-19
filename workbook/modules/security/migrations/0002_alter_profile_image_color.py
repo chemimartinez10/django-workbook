@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import workbook.modules.security.methods
+import modules.security.methods
 
 
 class Migration(migrations.Migration):
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='profile',
             name='image',
-            field=models.ImageField(blank=True, null=True, upload_to=workbook.modules.security.methods.get_file_path),
+            field=models.ImageField(blank=True, null=True, upload_to=modules.security.methods.get_file_path),
         ),
         migrations.CreateModel(
             name='Color',
