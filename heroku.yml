@@ -6,4 +6,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: cd ./workbook && gunicorn core.wsgi --log-file -
+  web: ls && cd workbook && gunicorn core.wsgi --log-file -
