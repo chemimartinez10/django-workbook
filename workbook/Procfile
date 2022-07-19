@@ -1,0 +1,1 @@
+web: ls && gunicorn workbook.core.wsgi --log-file -

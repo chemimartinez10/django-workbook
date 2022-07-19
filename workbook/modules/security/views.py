@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.shortcuts import redirect, render
-from workbook.modules.main.forms import FormList
-from workbook.modules.main.models import Item, ListTask
+from modules.main.forms import FormList
+from modules.main.models import Item, ListTask
 
 from .models import Color, Profile
 

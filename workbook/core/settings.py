@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'workbook.modules.security',
-    'workbook.modules.main'
+    'modules.security',
+    'modules.main'
 ]
 
 MIDDLEWARE = [
