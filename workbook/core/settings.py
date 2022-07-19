@@ -141,3 +141,5 @@ LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL ='/security/login'
 MEDIA_URL = '/images/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CSRF_TRUSTED_ORIGINS = ['https://django-workbook.herokuapp.com', 'https://www.django-workbook.herokuapp.com']
